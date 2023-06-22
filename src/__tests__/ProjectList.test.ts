@@ -12,7 +12,7 @@ it("should get project from project array specified by id", () => {
     const projectList = new ProjectList();
     const project = new Project();
     projectList.addProject(project);
-    const retrievedProject = project.getTask(project.id);
+    const retrievedProject = projectList.getProject(project.id);
     expect(retrievedProject).toBe(project);
 });
 
