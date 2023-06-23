@@ -2,19 +2,21 @@ import { uid } from "./utils";
 export default class Task {
     id: string = uid();
     title: string;
-    description: string;
+    description: string = "";
     dueDate: Date;
     priority: number;
-    isChecked: boolean = false;
+    isChecked: boolean;
     constructor(
         title: string,
         dueDate: Date,
         priority: number,
-        description: string = ""
+        description: string = "",
+        isChecked: boolean = false
     ) {
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
         this.description = description;
+        this.isChecked = isChecked;
     }
 }
