@@ -24,6 +24,46 @@
     overflow: auto;
 }
 
+.project {
+    display: flex;
+    cursor: pointer;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.project:last-child {
+    margin-bottom: 36px;
+}
+
+.project::before {
+    content: "";
+    width: 1.2rem;
+    aspect-ratio: 1;
+    background-color: currentColor;
+    border-radius: 50%;
+    left: -0.9rem;
+}
+
+.project-name {
+    margin-left: 0.5rem;
+}
+
+.project-delete {
+    margin-left: auto;
+}
+
+.project:hover,
+.project.active {
+    color: #f8f034;
+}
+
+.project:hover .project-name,
+.project.active .project-name {
+    margin-left: 0.8rem;
+}
+
 .add-project {
     background-color: transparent;
     position: relative;
@@ -49,15 +89,6 @@
     rotate: 90deg;
 }
 
-.project {
-    margin-bottom: 8px;
-}
-
-.project:last-child {
-    margin-bottom: 12px;
-}
-
-.project,
 .task {
     border: 4px solid;
     padding: 40px 0;
