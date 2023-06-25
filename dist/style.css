@@ -89,11 +89,6 @@
     rotate: 90deg;
 }
 
-.task {
-    border: 4px solid;
-    padding: 40px 0;
-}
-
 main {
     flex: 5;
     background: var(--primary-gradient);
@@ -102,7 +97,70 @@ main {
 }
 
 .task {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 5px solid;
+    padding-bottom: 12px;
+}
+
+.priority {
+    appearance: none;
+    cursor: pointer;
+    width: 24px;
+    aspect-ratio: 1;
+    background-color: #999999;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.priority.low {
+    background-color: #999999;
+}
+
+.priority.medium {
+    background-color: #6fb4e7;
+}
+
+.priority.high {
+    background-color: #f26f26;
+}
+
+.priority:checked {
+    background-color: #fff;
+}
+
+.priority:checked + .task-body {
+    text-decoration: line-through;
+}
+
+.priority:checked::before {
+    content: "✔";
+    font-size: 1rem;
+}
+
+.task-body:hover {
+    cursor: pointer;
+    scale: 1.01;
+}
+
+.task-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    display: block;
     margin-bottom: 8px;
+}
+
+.task-description {
+    margin-bottom: 5px;
+}
+
+.task-due-date {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .task:last-child {
