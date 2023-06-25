@@ -249,3 +249,59 @@ main {
     padding: 8px 20px;
     border-radius: 10px;
 }
+
+dialog::backdrop {
+    background-color: #0005;
+}
+
+dialog {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    border: none;
+    position: relative;
+}
+
+dialog .add-task-form {
+    background: linear-gradient(#d0eeff, #407eb7);
+    height: 50vh;
+    width: 600px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.close-dialog {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+}
+
+.close-dialog::before,
+.close-dialog::after {
+    content: "";
+    width: 30px;
+    height: 6px;
+    background-color: #4e87a7;
+    position: absolute;
+}
+
+.close-dialog::before {
+    rotate: 45deg;
+}
+
+.close-dialog::after {
+    rotate: 135deg;
+}
+
+dialog .description {
+    font-size: 1.1rem;
+    flex: 1;
+}
