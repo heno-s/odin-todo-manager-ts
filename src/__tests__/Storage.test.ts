@@ -12,7 +12,7 @@ it("should retrieve ProjectList from localstorage", () => {
 
 it("should retrieve Project instances from projects array of ProjectList", () => {
     const projectList = new ProjectList();
-    const project = new Project();
+    const project = new Project("test");
     projectList.addProject(project);
     Storage.saveProjectList(projectList);
     const retrievedProjectList = Storage.getProjectList();
@@ -21,7 +21,7 @@ it("should retrieve Project instances from projects array of ProjectList", () =>
 
 it("should retrieve Task instances from tasks array of Project", () => {
     const projectList = new ProjectList();
-    const project = new Project();
+    const project = new Project("test");
     const task = new Task("trash", new Date(), 0);
     projectList.addProject(project);
     project.addTask(task);
