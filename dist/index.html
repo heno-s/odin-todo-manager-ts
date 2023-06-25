@@ -40,7 +40,7 @@
                 <div class="tasks">
                     <div class="task">
                         <input
-                            class="priority"
+                            class="priority-checkbox"
                             type="checkbox"
                             id="checkbox"
                         />
@@ -68,7 +68,7 @@
                     </div>
                     <div class="task">
                         <input
-                            class="priority"
+                            class="priority-checkbox"
                             type="checkbox"
                             id="checkbox"
                         />
@@ -95,6 +95,33 @@
                         </div>
                     </div>
                 </div>
+                <form class="add-task-form">
+                    <input
+                        type="text"
+                        placeholder="title"
+                        name="title"
+                        class="title"
+                    />
+                    <textarea
+                        placeholder="description"
+                        name="description"
+                        class="description"
+                        rows="2"
+                    ></textarea>
+                    <div>
+                        <select class="priority" name="priority">
+                            <option value="0">low</option>
+                            <option value="1">medium</option>
+                            <option value="2">high</option>
+                        </select>
+                        <input
+                            type="date"
+                            name="due-date"
+                            class="due-date"
+                        />
+                    </div>
+                    <button class="save-button">save</button>
+                </form>
                 <div class="add-task">
                     <div class="add-task-mark"></div>
                     Add task

@@ -54,9 +54,12 @@
     margin-left: auto;
 }
 
-.project:hover,
 .project.active {
     color: #f8f034;
+}
+
+.project:hover:not(.active) {
+    scale: 1.01;
 }
 
 .project:hover .project-name,
@@ -105,7 +108,7 @@ main {
     padding-bottom: 12px;
 }
 
-.priority {
+.priority-checkbox {
     appearance: none;
     cursor: pointer;
     width: 24px;
@@ -116,27 +119,27 @@ main {
     place-items: center;
 }
 
-.priority.low {
+.priority-checkbox.low {
     background-color: #999999;
 }
 
-.priority.medium {
+.priority-checkbox.medium {
     background-color: #6fb4e7;
 }
 
-.priority.high {
+.priority-checkbox.high {
     background-color: #f26f26;
 }
 
-.priority:checked {
+.priority-checkbox:checked {
     background-color: #fff;
 }
 
-.priority:checked + .task-body {
+.priority-checkbox:checked + .task-body {
     text-decoration: line-through;
 }
 
-.priority:checked::before {
+.priority-checkbox:checked::before {
     content: "✔";
     font-size: 1rem;
 }
@@ -194,4 +197,55 @@ main {
 
 .add-task-mark::before {
     rotate: 90deg;
+}
+
+.add-task-form {
+    background-color: #fff7;
+    padding: 16px 24px;
+    position: relative;
+}
+
+.title,
+.description {
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+
+.title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    width: 60%;
+}
+
+.description {
+    font-size: 1rem;
+    display: block;
+    resize: none;
+    width: 80%;
+    margin-bottom: 6px;
+}
+
+.priority {
+    margin-right: 20px;
+}
+
+.priority,
+.due-date {
+    padding: 4px 6px;
+    border-radius: 10px;
+}
+
+.due-date {
+    cursor: text;
+}
+
+.save-button {
+    font-size: 1rem;
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
+    background-color: #6fb4e7;
+    padding: 8px 20px;
+    border-radius: 10px;
 }
