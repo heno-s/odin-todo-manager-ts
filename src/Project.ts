@@ -1,8 +1,12 @@
 import { uid } from "./utils";
 import Task from "./Task";
 export default class Project {
+    name: string;
     id: string = uid();
     tasks: Task[] = [];
+    constructor(name: string) {
+        this.name = name;
+    }
     addTask(task: Task): void {
         this.tasks.push(task);
     }
