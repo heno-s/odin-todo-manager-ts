@@ -1,5 +1,5 @@
-import Project from "../Project";
-import Task from "../Task";
+import Project from "../modules/Project";
+import Task from "../modules/Task";
 
 it("should add task to task array of project", () => {
     const project = new Project("test");

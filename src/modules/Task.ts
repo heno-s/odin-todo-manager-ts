@@ -1,4 +1,4 @@
-import { uid } from "./utils";
+import { uid } from "../utils.js";
 export default class Task {
     id: string = uid();
     title: string;

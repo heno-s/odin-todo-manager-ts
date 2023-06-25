@@ -1,4 +1,4 @@
-import Project from "./Project";
+import Project from "./Project.js";
 export default class ProjectList {
     static activeProject: Project;
     projects: Project[] = [];

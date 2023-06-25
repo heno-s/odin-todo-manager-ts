@@ -1,5 +1,5 @@
-import ProjectList from "../ProjectList";
-import Project from "../Project";
+import ProjectList from "../modules/ProjectList";
+import Project from "../modules/Project";
 
 it("should add Project to projects array", () => {
     const projectList = new ProjectList();

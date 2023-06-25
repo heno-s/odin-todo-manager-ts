@@ -1,5 +1,5 @@
-import { uid } from "./utils";
-import Task from "./Task";
+import { uid } from "../utils.js";
+import Task from "./Task.js";
 export default class Project {
     name: string;
     id: string = uid();

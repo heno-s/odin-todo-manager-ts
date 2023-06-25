@@ -1,7 +1,7 @@
-import Storage from "../Storage";
-import ProjectList from "../ProjectList";
-import Project from "../Project";
-import Task from "../Task";
+import Storage from "../modules/Storage";
+import ProjectList from "../modules/ProjectList";
+import Project from "../modules/Project";
+import Task from "../modules/Task";
 
 it("should retrieve ProjectList from localstorage", () => {
     const projectList = new ProjectList();

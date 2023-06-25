@@ -1,6 +1,6 @@
-import ProjectList from "./ProjectList";
-import Project from "./Project";
-import Task from "./Task";
+import ProjectList from "./ProjectList.js";
+import Project from "./Project.js";
+import Task from "./Task.js";
 export default class Storage {
     static saveProjectList(projectList: ProjectList) {
         localStorage.setItem(
@@ -18,7 +18,8 @@ export default class Storage {
                 JSON.parse(projectListString) as ProjectList
             );
             projectList.projects = projectList.projects.map(
-                (project) => Object.assign(new Project(), project)
+                (project) =>
+                    Object.assign(new Project(project.name), project)
             );
             projectList.projects.forEach(
                 (project) =>
