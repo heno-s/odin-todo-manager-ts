@@ -1,21 +1,28 @@
 import Project from "./modules/Project.js";
+import ProjectList from "./modules/ProjectList.js";
 import Task from "./modules/Task.js";
 import UI from "./modules/UI.js";
 
-const projects = document.querySelector(
+const projectsDOM = document.querySelector(
     ".projects"
 ) as HTMLUListElement;
 
-const tasks = document.querySelector(".tasks") as HTMLDivElement;
+const tasksDOM = document.querySelector(".tasks") as HTMLDivElement;
 
 const main = document.querySelector("main") as HTMLElement;
 const container = document.querySelector(
     ".container"
 ) as HTMLDivElement;
 
-const projectHouse = new Project("house");
-const projectWork = new Project("work");
-const projectSchool = new Project("school");
+const projects = [
+    new Project("house"),
+    new Project("work"),
+    new Project("school"),
+];
+
+const [projectHouse, projectWork, projectSchool] = projects;
+
+ProjectList.activeProject = projectWork;
 
 const task1 = new Task(
     "take out trash",
@@ -32,16 +39,17 @@ const task2 = new Task(
     true
 );
 
-projects.appendChild(UI.createProject(projectHouse));
-projects.appendChild(UI.createProject(projectWork));
-projects.appendChild(UI.createProject(projectSchool));
+const task3 = new Task(
+    "report to boss",
+    new Date(),
+    2,
+    undefined,
+    true
+);
 
-tasks.appendChild(UI.createTask(task1));
-tasks.appendChild(UI.createTask(task2));
-main.appendChild(UI.createAddTaskForm());
+projectHouse.addTask(task1);
+projectHouse.addTask(task2);
+projectWork.addTask(task3);
 
-const dialog = UI.createUpdateTaskDialogForm(task1);
-container.appendChild(dialog);
-dialog.showModal();
-
-UI.setActiveProject(projectWork.id);
+UI.renderProjects(projects);
+UI.renderTasks(ProjectList.activeProject);

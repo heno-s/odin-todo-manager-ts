@@ -1,4 +1,5 @@
 import Project from "./Project.js";
+import ProjectList from "./ProjectList.js";
 import Task from "./Task.js";
 
 export default class UI {
@@ -213,5 +214,26 @@ export default class UI {
             dialog.remove();
             return true;
         }
+    }
+
+    static renderProjects(projects: Project[]): void {
+        const projectsDOM = document.querySelector(
+            ".projects"
+        ) as HTMLUListElement;
+        projects.forEach((project) => {
+            const projectDOM = UI.createProject(project);
+            projectsDOM.appendChild(projectDOM);
+            if (ProjectList.activeProject.id === project.id) {
+                UI.setActiveProject(project.id);
+            }
+        });
+    }
+    static renderTasks(project: Project) {
+        const taskDOM = document.querySelector(
+            ".tasks"
+        ) as HTMLDivElement;
+        project.tasks.forEach((task) =>
+            taskDOM.appendChild(UI.createTask(task))
+        );
     }
 }

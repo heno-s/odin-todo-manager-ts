@@ -1,3 +1,4 @@
+import ProjectList from "./ProjectList.js";
 export default class UI {
     static createProject(project) {
         const projectContainer = document.createElement("li");
@@ -172,5 +173,19 @@ export default class UI {
             dialog.remove();
             return true;
         }
+    }
+    static renderProjects(projects) {
+        const projectsDOM = document.querySelector(".projects");
+        projects.forEach((project) => {
+            const projectDOM = UI.createProject(project);
+            projectsDOM.appendChild(projectDOM);
+            if (ProjectList.activeProject.id === project.id) {
+                UI.setActiveProject(project.id);
+            }
+        });
+    }
+    static renderTasks(project) {
+        const taskDOM = document.querySelector(".tasks");
+        project.tasks.forEach((task) => taskDOM.appendChild(UI.createTask(task)));
     }
 }
