@@ -27,7 +27,7 @@ export default class Storage {
                         (task) =>
                             new Task(
                                 task.title,
-                                task.dueDate,
+                                new Date(task.dueDate),
                                 task.priority,
                                 task.description,
                                 task.isChecked

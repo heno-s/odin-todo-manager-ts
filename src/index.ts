@@ -1,9 +1,14 @@
 import Project from "./modules/Project.js";
 import ProjectList from "./modules/ProjectList.js";
+import Storage from "./modules/Storage.js";
 import Task from "./modules/Task.js";
 import UI from "./modules/UI.js";
 
-const projectList = new ProjectList();
+const projectList = Storage.getProjectList();
+ProjectList.activeProject = projectList.projects[0];
+
+UI.renderProjects(projectList.projects);
+UI.renderTasks(ProjectList.activeProject);
 
 const projectsUl = document.querySelector(
     ".projects"
@@ -28,11 +33,10 @@ projectsUl.addEventListener("click", (evt) => {
 
     const projectDOM = t.closest(".project") as HTMLLIElement;
     const projectId = projectDOM.id;
-    console.log(projectId);
     const project = projectList.getProject(projectId) as Project;
-    console.log(project);
 
     projectList.deleteProject(project.id);
+    Storage.saveProjectList(projectList);
     if (ProjectList.activeProject.id === project.id) {
         UI.deleteTasks();
         if (projectList.projects.length > 0) {
@@ -85,6 +89,7 @@ addProjectButton.addEventListener("click", (evt) => {
 
         projectList.addProject(project);
         ProjectList.activeProject = project;
+        Storage.saveProjectList(projectList);
 
         // render
         UI.deleteProjects();
@@ -112,6 +117,7 @@ tasksDiv.addEventListener("click", (evt) => {
     const task = activeProject.getTask(taskId) as Task;
 
     task.isChecked = !task.isChecked;
+    Storage.saveProjectList(projectList);
 });
 
 tasksDiv.addEventListener("click", (evt) => {
@@ -161,6 +167,8 @@ tasksDiv.addEventListener("click", (evt) => {
         task.priority = +priority;
         task.dueDate = new Date(dueDate);
 
+        Storage.saveProjectList(projectList);
+
         UI.deleteTasks();
         UI.renderTasks(ProjectList.activeProject);
         updateForm.removeEventListener("submit", handleSubmit);
@@ -203,6 +211,7 @@ addTaskButton.addEventListener("click", (evt) => {
         const activeProject = ProjectList.activeProject;
 
         activeProject.addTask(task);
+        Storage.saveProjectList(projectList);
 
         //render
         UI.deleteTasks();
@@ -214,4 +223,5 @@ addTaskButton.addEventListener("click", (evt) => {
     }
 
     tasks.appendChild(form);
+    (form.querySelector(".title") as HTMLInputElement).focus();
 });

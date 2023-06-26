@@ -13,7 +13,7 @@ export default class Storage {
         else {
             const projectList = Object.assign(new ProjectList(), JSON.parse(projectListString));
             projectList.projects = projectList.projects.map((project) => Object.assign(new Project(project.name), project));
-            projectList.projects.forEach((project) => (project.tasks = project.tasks.map((task) => new Task(task.title, task.dueDate, task.priority, task.description, task.isChecked))));
+            projectList.projects.forEach((project) => (project.tasks = project.tasks.map((task) => new Task(task.title, new Date(task.dueDate), task.priority, task.description, task.isChecked))));
             return projectList;
         }
     }
