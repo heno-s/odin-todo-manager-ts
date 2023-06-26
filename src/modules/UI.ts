@@ -199,7 +199,7 @@ export default class UI {
         const datePicker = dialog.querySelector(
             "input[type=date]"
         ) as HTMLInputElement;
-        datePicker.valueAsDate = dueDate;
+        datePicker.valueAsDate = new Date(dueDate);
 
         return dialog;
     }

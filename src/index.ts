@@ -56,12 +56,28 @@ tasksDiv.addEventListener("click", (evt) => {
     if (isTaskCheckbox) {
         const taskId = t.closest(".task")?.id as string;
         const activeProject = ProjectList.activeProject;
-        const task = activeProject.getTask(taskId);
-        if (task === null) {
-            return;
-        } else {
-            task.isChecked = !task.isChecked;
-        }
+        const task = activeProject.getTask(taskId) as Task;
+
+        task.isChecked = !task.isChecked;
+    }
+});
+
+tasksDiv.addEventListener("click", (evt) => {
+    const t = evt.target as HTMLElement;
+    const taskBody = t.closest(".task-body");
+
+    if (taskBody !== null) {
+        const taskDOM = t.closest(".task") as HTMLDivElement;
+        const taskId = taskDOM.id;
+        const task = ProjectList.activeProject.getTask(
+            taskId
+        ) as Task;
+        const dialog = UI.createUpdateTaskDialogForm(task);
+        const appContainer = document.querySelector(
+            ".container"
+        ) as HTMLDivElement;
+        appContainer.appendChild(dialog);
+        dialog.showModal();
     }
 });
 

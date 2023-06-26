@@ -162,7 +162,7 @@ export default class UI {
         <button class="save-button">save</button>
     </form>`;
         const datePicker = dialog.querySelector("input[type=date]");
-        datePicker.valueAsDate = dueDate;
+        datePicker.valueAsDate = new Date(dueDate);
         return dialog;
     }
     static deleteUpdateTaskDialog() {

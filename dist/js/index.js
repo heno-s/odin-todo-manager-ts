@@ -36,12 +36,20 @@ tasksDiv.addEventListener("click", (evt) => {
         const taskId = (_a = t.closest(".task")) === null || _a === void 0 ? void 0 : _a.id;
         const activeProject = ProjectList.activeProject;
         const task = activeProject.getTask(taskId);
-        if (task === null) {
-            return;
-        }
-        else {
-            task.isChecked = !task.isChecked;
-        }
+        task.isChecked = !task.isChecked;
+    }
+});
+tasksDiv.addEventListener("click", (evt) => {
+    const t = evt.target;
+    const taskBody = t.closest(".task-body");
+    if (taskBody !== null) {
+        const taskDOM = t.closest(".task");
+        const taskId = taskDOM.id;
+        const task = ProjectList.activeProject.getTask(taskId);
+        const dialog = UI.createUpdateTaskDialogForm(task);
+        const appContainer = document.querySelector(".container");
+        appContainer.appendChild(dialog);
+        dialog.showModal();
     }
 });
 addTaskButton.addEventListener("click", (evt) => {
