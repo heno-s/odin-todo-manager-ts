@@ -1,4 +1,5 @@
 import Project from "./Project.js";
+import Task from "./Task.js";
 
 export default class UI {
     static createProject(project: Project): HTMLLIElement {
@@ -32,5 +33,54 @@ export default class UI {
                 activeProject.classList.remove("active");
             }
         }
+    }
+
+    static createTask({
+        id,
+        title,
+        priority,
+        dueDate,
+        description,
+        isChecked,
+    }: Task): HTMLDivElement {
+        const taskContainer = document.createElement("div");
+        taskContainer.id = id;
+        taskContainer.classList.add("task");
+        const priorities = ["low", "medium", "high"];
+        taskContainer.innerHTML = `<input
+        class="priority-checkbox${" " + priorities[priority]}"
+        type="checkbox"
+        ${isChecked ? "checked" : ""}
+    />
+    <div class="task-body">
+        <span class="task-name"
+            >${title}</span
+        >
+        ${
+            description &&
+            `<p class="task-description">
+        ${description}
+    </p>`
+        }
+
+            <div class="task-due-date">
+        <div class="task-calendar"><i
+        class="fa-regular fa-calendar"
+    ></i></div>
+        <span class="task-date"
+            >${Intl.DateTimeFormat("en-US", {
+                dateStyle: "short",
+            }).format(dueDate)}</span
+        >
+    </div>
+        
+    </div>
+    <div class="task-delete">
+        <span class="task-trash-icon"
+            ><i class="far fa-trash-can"></i
+        ></span>
+    </div>`;
+
+        return taskContainer;
     }
 }

@@ -144,6 +144,10 @@ main {
     font-size: 1rem;
 }
 
+.task-body {
+    flex: 1;
+}
+
 .task-body:hover {
     cursor: pointer;
     scale: 1.01;
