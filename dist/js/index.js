@@ -3,9 +3,28 @@ import ProjectList from "./modules/ProjectList.js";
 import Task from "./modules/Task.js";
 import UI from "./modules/UI.js";
 const projectList = new ProjectList();
+const projectsUl = document.querySelector(".projects");
 const addProjectButton = document.querySelector(".add-project");
 const tasksDiv = document.querySelector(".tasks");
 const addTaskButton = document.querySelector(".add-task");
+projectsUl.addEventListener("click", (evt) => {
+    const t = evt.target;
+    const clickedDeleteIcon = t.closest(".project-delete") !== null;
+    if (!clickedDeleteIcon) {
+        return;
+    }
+    const projectDOM = t.closest(".project");
+    const projectId = projectDOM.id;
+    const project = projectList.getProject(projectId);
+    projectList.deleteProject(project.id);
+    if (ProjectList.activeProject.id === project.id) {
+        ProjectList.activeProject = projectList.projects[0];
+        UI.deleteTasks();
+        UI.renderTasks(ProjectList.activeProject);
+    }
+    UI.deleteProjects();
+    UI.renderProjects(projectList.projects);
+});
 addProjectButton.addEventListener("click", (evt) => {
     addProjectButton.classList.add("hide");
     const sidebarBody = document.querySelector(".sidebar-body");

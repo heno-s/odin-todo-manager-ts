@@ -5,6 +5,10 @@ import UI from "./modules/UI.js";
 
 const projectList = new ProjectList();
 
+const projectsUl = document.querySelector(
+    ".projects"
+) as HTMLUListElement;
+
 const addProjectButton = document.querySelector(
     ".add-project"
 ) as HTMLButtonElement;
@@ -14,6 +18,27 @@ const tasksDiv = document.querySelector(".tasks") as HTMLDivElement;
 const addTaskButton = document.querySelector(
     ".add-task"
 ) as HTMLDivElement;
+
+projectsUl.addEventListener("click", (evt) => {
+    const t = evt.target as HTMLElement;
+    const clickedDeleteIcon = t.closest(".project-delete") !== null;
+    if (!clickedDeleteIcon) {
+        return;
+    }
+
+    const projectDOM = t.closest(".project") as HTMLLIElement;
+    const projectId = projectDOM.id;
+    const project = projectList.getProject(projectId) as Project;
+
+    projectList.deleteProject(project.id);
+    if (ProjectList.activeProject.id === project.id) {
+        ProjectList.activeProject = projectList.projects[0];
+        UI.deleteTasks();
+        UI.renderTasks(ProjectList.activeProject);
+    }
+    UI.deleteProjects();
+    UI.renderProjects(projectList.projects);
+});
 
 addProjectButton.addEventListener("click", (evt) => {
     addProjectButton.classList.add("hide");
