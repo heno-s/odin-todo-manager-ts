@@ -176,8 +176,24 @@ tasksDiv.addEventListener("click", (evt) => {
 
     dialog.addEventListener("close", (evt) => {
         UI.deleteUpdateTaskDialog();
-        console.log("CLOSING");
     });
+});
+
+tasksDiv.addEventListener("click", (evt) => {
+    const t = evt.target as HTMLElement;
+    const clickedDeleteIcon = t.closest(".task-delete");
+    if (clickedDeleteIcon === null) {
+        return;
+    }
+
+    const taskDOM = t.closest(".task") as HTMLDivElement;
+    const taskId = taskDOM.id;
+    const activeProject = ProjectList.activeProject;
+    activeProject.deleteTask(taskId);
+    Storage.saveProjectList(projectList);
+
+    UI.deleteTasks();
+    UI.renderTasks(activeProject);
 });
 
 addTaskButton.addEventListener("click", (evt) => {
