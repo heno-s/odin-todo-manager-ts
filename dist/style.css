@@ -92,6 +92,23 @@
     rotate: 90deg;
 }
 
+form.project-add {
+    display: flex;
+    gap: 20px;
+}
+
+form.project-add input {
+    font-size: 1rem;
+    flex: 1;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+form.project-add button {
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
 main {
     flex: 5;
     background: var(--primary-gradient);
