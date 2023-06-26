@@ -228,13 +228,28 @@ export default class UI {
             }
         });
     }
-    static renderTasks(project: Project) {
+
+    static deleteProjects(): void {
+        const projects = document.querySelector(
+            ".projects"
+        ) as HTMLUListElement;
+        projects.innerHTML = "";
+    }
+
+    static renderTasks(project: Project): void {
         const taskDOM = document.querySelector(
             ".tasks"
         ) as HTMLDivElement;
         project.tasks.forEach((task) =>
             taskDOM.appendChild(UI.createTask(task))
         );
+    }
+
+    static deleteTasks(): void {
+        const tasks = document.querySelector(
+            ".tasks"
+        ) as HTMLDivElement;
+        tasks.innerHTML = "";
     }
 
     static createAddProjectForm(): HTMLFormElement {
@@ -244,6 +259,8 @@ export default class UI {
 <input
     type="text"
     placeholder="project name"
+    name="projectName"
+    required
 />
 <button>Add</button>
 `;

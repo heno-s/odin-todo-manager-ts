@@ -92,19 +92,19 @@
     rotate: 90deg;
 }
 
-form.project-add {
+form.add-project-form {
     display: flex;
     gap: 20px;
 }
 
-form.project-add input {
+form.add-project-form input {
     font-size: 1rem;
     flex: 1;
     padding: 10px 20px;
     border-radius: 10px;
 }
 
-form.project-add button {
+form.add-project-form button {
     padding: 10px 20px;
     border-radius: 10px;
 }
@@ -334,4 +334,8 @@ dialog .description {
 
 .fa-trash-can:hover {
     color: rgb(240, 121, 105);
+}
+
+.hide {
+    display: none;
 }

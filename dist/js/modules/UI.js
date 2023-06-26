@@ -184,8 +184,40 @@ export default class UI {
             }
         });
     }
+    static deleteProjects() {
+        const projects = document.querySelector(".projects");
+        projects.innerHTML = "";
+    }
     static renderTasks(project) {
         const taskDOM = document.querySelector(".tasks");
         project.tasks.forEach((task) => taskDOM.appendChild(UI.createTask(task)));
+    }
+    static deleteTasks() {
+        const tasks = document.querySelector(".tasks");
+        tasks.innerHTML = "";
+    }
+    static createAddProjectForm() {
+        const form = document.createElement("form");
+        form.classList.add("add-project-form");
+        form.innerHTML = `
+<input
+    type="text"
+    placeholder="project name"
+    name="projectName"
+    required
+/>
+<button>Add</button>
+`;
+        return form;
+    }
+    static deleteAddProjectForm() {
+        const form = document.querySelector(".add-project-form");
+        if (form === null) {
+            return false;
+        }
+        else {
+            form.remove();
+            return true;
+        }
     }
 }
