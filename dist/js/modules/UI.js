@@ -117,6 +117,16 @@ export default class UI {
 `;
         return form;
     }
+    static deleteAddTaskForm() {
+        const form = document.querySelector('.add-task-form:not([method="dialog"])');
+        if (form === null) {
+            return false;
+        }
+        else {
+            form.remove();
+            return true;
+        }
+    }
     static createAddTAskDialogForm() {
         const dialog = document.createElement("dialog");
         dialog.innerHTML = `<form method="dialog" class="add-task-form">
@@ -147,5 +157,15 @@ export default class UI {
         <button class="save-button">save</button>
     </form>`;
         return dialog;
+    }
+    static deleteAddTaskDialog() {
+        const dialog = document.querySelector("dialog:has(.add-task-form)");
+        if (dialog === null) {
+            return false;
+        }
+        else {
+            dialog.remove();
+            return true;
+        }
     }
 }

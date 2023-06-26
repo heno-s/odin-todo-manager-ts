@@ -19,4 +19,8 @@ main.appendChild(UI.createAddTaskForm());
 const dialog = UI.createAddTAskDialogForm();
 container.appendChild(dialog);
 dialog.showModal();
+setTimeout(() => {
+    UI.deleteAddTaskDialog();
+    UI.deleteAddTaskForm();
+}, 2000);
 UI.setActiveProject(projectWork.id);
