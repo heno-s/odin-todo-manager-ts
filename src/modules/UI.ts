@@ -18,6 +18,16 @@ export default class UI {
         return projectContainer;
     }
 
+    static deleteProject(id: string): boolean {
+        const project = document.getElementById(id);
+        if (project === null) {
+            return false;
+        } else {
+            project.remove();
+            return true;
+        }
+    }
+
     static setActiveProject(id: string): void {
         removeActive();
         setActive();
@@ -82,5 +92,15 @@ export default class UI {
     </div>`;
 
         return taskContainer;
+    }
+
+    static deleteTask(id: string): boolean {
+        const task = document.getElementById(id);
+        if (task === null) {
+            return false;
+        } else {
+            task.remove();
+            return true;
+        }
     }
 }
