@@ -40,6 +40,27 @@ projectsUl.addEventListener("click", (evt) => {
     UI.renderProjects(projectList.projects);
 });
 
+projectsUl.addEventListener("click", (evt) => {
+    const t = evt.target as HTMLElement;
+    const clickedDeleteIcon = t.closest(".project-delete") !== null;
+    const clickedProject = t.closest(".project") !== null;
+    if (clickedDeleteIcon || !clickedProject) {
+        return;
+    }
+    const projectDOM = t.closest(".project") as HTMLLIElement;
+    const projectId = projectDOM.id;
+    const project = projectList.getProject(projectId) as Project;
+
+    if (ProjectList.activeProject.id === project.id) {
+        return;
+    }
+    ProjectList.activeProject = project;
+
+    UI.setActiveProject(project.id);
+    UI.deleteTasks();
+    UI.renderTasks(project);
+});
+
 addProjectButton.addEventListener("click", (evt) => {
     addProjectButton.classList.add("hide");
 
