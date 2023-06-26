@@ -220,6 +220,10 @@ main {
     rotate: 90deg;
 }
 
+.container:has(.projects:empty) .add-task {
+    display: none;
+}
+
 .add-task-form {
     background-color: #fff7;
     padding: 16px 24px;
