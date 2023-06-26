@@ -14,7 +14,7 @@ addProjectButton.addEventListener("click", (evt) => {
     function handleSubmit(evt) {
         evt.preventDefault();
         const t = evt.target;
-        const projectName = t["projectName"].value;
+        const projectName = t.projectName.value;
         const project = new Project(projectName);
         projectList.addProject(project);
         ProjectList.activeProject = project;
@@ -32,25 +32,48 @@ tasksDiv.addEventListener("click", (evt) => {
     var _a;
     const t = evt.target;
     const isTaskCheckbox = t.classList.contains("priority-checkbox");
-    if (isTaskCheckbox) {
-        const taskId = (_a = t.closest(".task")) === null || _a === void 0 ? void 0 : _a.id;
-        const activeProject = ProjectList.activeProject;
-        const task = activeProject.getTask(taskId);
-        task.isChecked = !task.isChecked;
+    if (!isTaskCheckbox) {
+        return;
     }
+    const taskId = (_a = t.closest(".task")) === null || _a === void 0 ? void 0 : _a.id;
+    const activeProject = ProjectList.activeProject;
+    const task = activeProject.getTask(taskId);
+    task.isChecked = !task.isChecked;
 });
 tasksDiv.addEventListener("click", (evt) => {
     const t = evt.target;
     const taskBody = t.closest(".task-body");
-    if (taskBody !== null) {
-        const taskDOM = t.closest(".task");
-        const taskId = taskDOM.id;
-        const task = ProjectList.activeProject.getTask(taskId);
-        const dialog = UI.createUpdateTaskDialogForm(task);
-        const appContainer = document.querySelector(".container");
-        appContainer.appendChild(dialog);
-        dialog.showModal();
+    if (taskBody === null) {
+        return;
     }
+    const taskDOM = t.closest(".task");
+    const taskId = taskDOM.id;
+    const task = ProjectList.activeProject.getTask(taskId);
+    const dialog = UI.createUpdateTaskDialogForm(task);
+    const appContainer = document.querySelector(".container");
+    appContainer.appendChild(dialog);
+    dialog.showModal();
+    const updateForm = dialog.querySelector("form");
+    updateForm.addEventListener("submit", handleSubmit);
+    function handleSubmit() {
+        const id = updateForm.taskId.value;
+        const title = updateForm.taskTitle.value;
+        const description = updateForm.description.value;
+        const priority = updateForm.priority.value;
+        const dueDate = updateForm["due-date"].value;
+        const task = ProjectList.activeProject.getTask(id);
+        task.title = title;
+        task.description = description;
+        task.priority = +priority;
+        task.dueDate = new Date(dueDate);
+        UI.deleteTasks();
+        UI.renderTasks(ProjectList.activeProject);
+        updateForm.removeEventListener("submit", handleSubmit);
+    }
+    dialog.addEventListener("close", (evt) => {
+        UI.deleteUpdateTaskDialog();
+        console.log("CLOSING");
+    });
 });
 addTaskButton.addEventListener("click", (evt) => {
     addTaskButton.classList.add("hide");
@@ -65,7 +88,7 @@ addTaskButton.addEventListener("click", (evt) => {
         const description = t["description"].value;
         const priority = t["priority"].value;
         const dueDate = t["due-date"].value;
-        const task = new Task(title, dueDate, priority, description);
+        const task = new Task(title, new Date(dueDate), +priority, description);
         const activeProject = ProjectList.activeProject;
         activeProject.addTask(task);
         UI.deleteTasks();

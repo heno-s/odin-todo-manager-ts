@@ -129,18 +129,24 @@ export default class UI {
             return true;
         }
     }
-    static createUpdateTaskDialogForm({ title, description, priority, dueDate, }) {
+    static createUpdateTaskDialogForm({ id, title, description, priority, dueDate, }) {
         console.log(title);
         const dialog = document.createElement("dialog");
         const priorities = ["low", "medium", "high"];
         dialog.innerHTML = `<form method="dialog" class="add-task-form">
+        <input
+            type="hidden"
+            name="taskId"
+            value="${id}"
+        />
         <div class="close-dialog"></div>
         <input
             type="text"
             placeholder="title"
-            name="title"
+            name="taskTitle"
             class="title"
             value="${title}"
+            required
         />
         <textarea
             placeholder="description"
@@ -148,7 +154,8 @@ export default class UI {
             class="description"
         >${description ? description : ""}</textarea>
         <div>
-            <select class="priority" name="priority">
+            <select class="priority" name="priority"
+            required>
                 ${priorities
             .map((value, index) => `<option value="${index}" ${index === priority ? "selected" : ""}>${value}</option>`)
             .join("")}
@@ -157,6 +164,7 @@ export default class UI {
                 type="date"
                 name="due-date"
                 class="due-date"
+                required
             />
         </div>
         <button class="save-button">save</button>

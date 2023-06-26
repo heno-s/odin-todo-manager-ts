@@ -30,7 +30,7 @@ addProjectButton.addEventListener("click", (evt) => {
 
         // logic
         const t = evt.target as HTMLFormElement;
-        const projectName = t["projectName"].value;
+        const projectName = t.projectName.value as string;
         const project = new Project(projectName);
 
         projectList.addProject(project);
@@ -53,32 +53,65 @@ addProjectButton.addEventListener("click", (evt) => {
 tasksDiv.addEventListener("click", (evt) => {
     const t = evt.target as HTMLElement;
     const isTaskCheckbox = t.classList.contains("priority-checkbox");
-    if (isTaskCheckbox) {
-        const taskId = t.closest(".task")?.id as string;
-        const activeProject = ProjectList.activeProject;
-        const task = activeProject.getTask(taskId) as Task;
-
-        task.isChecked = !task.isChecked;
+    if (!isTaskCheckbox) {
+        return;
     }
+    const taskId = t.closest(".task")?.id as string;
+    const activeProject = ProjectList.activeProject;
+    const task = activeProject.getTask(taskId) as Task;
+
+    task.isChecked = !task.isChecked;
 });
 
 tasksDiv.addEventListener("click", (evt) => {
     const t = evt.target as HTMLElement;
     const taskBody = t.closest(".task-body");
 
-    if (taskBody !== null) {
-        const taskDOM = t.closest(".task") as HTMLDivElement;
-        const taskId = taskDOM.id;
-        const task = ProjectList.activeProject.getTask(
-            taskId
-        ) as Task;
-        const dialog = UI.createUpdateTaskDialogForm(task);
-        const appContainer = document.querySelector(
-            ".container"
-        ) as HTMLDivElement;
-        appContainer.appendChild(dialog);
-        dialog.showModal();
+    //logic
+    if (taskBody === null) {
+        return;
     }
+    const taskDOM = t.closest(".task") as HTMLDivElement;
+    const taskId = taskDOM.id;
+    const task = ProjectList.activeProject.getTask(taskId) as Task;
+    const dialog = UI.createUpdateTaskDialogForm(task);
+
+    // render
+    const appContainer = document.querySelector(
+        ".container"
+    ) as HTMLDivElement;
+    appContainer.appendChild(dialog);
+    dialog.showModal();
+
+    const updateForm = dialog.querySelector(
+        "form"
+    ) as HTMLFormElement;
+
+    updateForm.addEventListener("submit", handleSubmit);
+
+    function handleSubmit() {
+        const id = updateForm.taskId.value as string;
+        const title = updateForm.taskTitle.value as string;
+        const description = updateForm.description.value as string;
+        const priority = updateForm.priority.value as string;
+        const dueDate = updateForm["due-date"].value as string;
+
+        const task = ProjectList.activeProject.getTask(id) as Task;
+
+        task.title = title;
+        task.description = description;
+        task.priority = +priority;
+        task.dueDate = new Date(dueDate);
+
+        UI.deleteTasks();
+        UI.renderTasks(ProjectList.activeProject);
+        updateForm.removeEventListener("submit", handleSubmit);
+    }
+
+    dialog.addEventListener("close", (evt) => {
+        UI.deleteUpdateTaskDialog();
+        console.log("CLOSING");
+    });
 });
 
 addTaskButton.addEventListener("click", (evt) => {
@@ -98,12 +131,17 @@ addTaskButton.addEventListener("click", (evt) => {
         const titleInput = t.querySelector(
             'input[name="title"]'
         ) as HTMLInputElement;
-        const title = titleInput.value;
-        const description = t["description"].value;
-        const priority = t["priority"].value;
-        const dueDate = t["due-date"].value;
+        const title = titleInput.value as string;
+        const description = t["description"].value as string;
+        const priority = t["priority"].value as string;
+        const dueDate = t["due-date"].value as string;
 
-        const task = new Task(title, dueDate, priority, description);
+        const task = new Task(
+            title,
+            new Date(dueDate),
+            +priority,
+            description
+        );
         const activeProject = ProjectList.activeProject;
 
         activeProject.addTask(task);
