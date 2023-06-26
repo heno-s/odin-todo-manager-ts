@@ -236,4 +236,28 @@ export default class UI {
             taskDOM.appendChild(UI.createTask(task))
         );
     }
+
+    static createAddProjectForm(): HTMLFormElement {
+        const form = document.createElement("form");
+        form.classList.add("add-project-form");
+        form.innerHTML = `
+<input
+    type="text"
+    placeholder="project name"
+/>
+<button>Add</button>
+`;
+
+        return form;
+    }
+
+    static deleteAddProjectForm(): boolean {
+        const form = document.querySelector(".add-project-form");
+        if (form === null) {
+            return false;
+        } else {
+            form.remove();
+            return true;
+        }
+    }
 }
