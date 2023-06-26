@@ -4,6 +4,7 @@ import Task from "./modules/Task.js";
 import UI from "./modules/UI.js";
 const projectList = new ProjectList();
 const addProjectButton = document.querySelector(".add-project");
+const tasksDiv = document.querySelector(".tasks");
 const addTaskButton = document.querySelector(".add-task");
 addProjectButton.addEventListener("click", (evt) => {
     addProjectButton.classList.add("hide");
@@ -26,6 +27,22 @@ addProjectButton.addEventListener("click", (evt) => {
         form.removeEventListener("submit", handleSubmit);
     }
     sidebarBody.appendChild(form);
+});
+tasksDiv.addEventListener("click", (evt) => {
+    var _a;
+    const t = evt.target;
+    const isTaskCheckbox = t.classList.contains("priority-checkbox");
+    if (isTaskCheckbox) {
+        const taskId = (_a = t.closest(".task")) === null || _a === void 0 ? void 0 : _a.id;
+        const activeProject = ProjectList.activeProject;
+        const task = activeProject.getTask(taskId);
+        if (task === null) {
+            return;
+        }
+        else {
+            task.isChecked = !task.isChecked;
+        }
+    }
 });
 addTaskButton.addEventListener("click", (evt) => {
     addTaskButton.classList.add("hide");

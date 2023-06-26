@@ -9,6 +9,8 @@ const addProjectButton = document.querySelector(
     ".add-project"
 ) as HTMLButtonElement;
 
+const tasksDiv = document.querySelector(".tasks") as HTMLDivElement;
+
 const addTaskButton = document.querySelector(
     ".add-task"
 ) as HTMLDivElement;
@@ -46,6 +48,21 @@ addProjectButton.addEventListener("click", (evt) => {
     }
 
     sidebarBody.appendChild(form);
+});
+
+tasksDiv.addEventListener("click", (evt) => {
+    const t = evt.target as HTMLElement;
+    const isTaskCheckbox = t.classList.contains("priority-checkbox");
+    if (isTaskCheckbox) {
+        const taskId = t.closest(".task")?.id as string;
+        const activeProject = ProjectList.activeProject;
+        const task = activeProject.getTask(taskId);
+        if (task === null) {
+            return;
+        } else {
+            task.isChecked = !task.isChecked;
+        }
+    }
 });
 
 addTaskButton.addEventListener("click", (evt) => {
