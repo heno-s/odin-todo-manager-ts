@@ -90,11 +90,15 @@ tasksDiv.addEventListener("click", (evt) => {
     const taskDOM = t.closest(".task");
     const taskId = taskDOM.id;
     const task = ProjectList.activeProject.getTask(taskId);
-    const dialog = UI.createUpdateTaskDialogForm(task);
     const appContainer = document.querySelector(".container");
+    const dialog = UI.createUpdateTaskDialogForm(task);
     appContainer.appendChild(dialog);
     dialog.showModal();
+    const closeDialogButton = dialog.querySelector(".close-dialog");
     const updateForm = dialog.querySelector("form");
+    closeDialogButton.addEventListener("click", (evt) => {
+        dialog.close();
+    });
     updateForm.addEventListener("submit", handleSubmit);
     function handleSubmit() {
         const id = updateForm.taskId.value;
