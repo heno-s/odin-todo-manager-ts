@@ -79,7 +79,9 @@ export default class UI {
         class="fa-regular fa-calendar"
     ></i></div>
         <span class="task-date"
-            >${dueDate}</span
+            >${Intl.DateTimeFormat(navigator.language, {
+                dateStyle: "medium",
+            }).format(dueDate)}</span
         >
     </div>
         
