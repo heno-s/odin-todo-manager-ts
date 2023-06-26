@@ -68,6 +68,7 @@ addProjectButton.addEventListener("click", (evt) => {
         form.removeEventListener("submit", handleSubmit);
     }
     sidebarBody.appendChild(form);
+    form.projectName.focus();
 });
 tasksDiv.addEventListener("click", (evt) => {
     var _a;

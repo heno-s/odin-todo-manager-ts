@@ -98,6 +98,7 @@ addProjectButton.addEventListener("click", (evt) => {
     }
 
     sidebarBody.appendChild(form);
+    form.projectName.focus();
 });
 
 tasksDiv.addEventListener("click", (evt) => {
