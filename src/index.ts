@@ -28,13 +28,17 @@ projectsUl.addEventListener("click", (evt) => {
 
     const projectDOM = t.closest(".project") as HTMLLIElement;
     const projectId = projectDOM.id;
+    console.log(projectId);
     const project = projectList.getProject(projectId) as Project;
+    console.log(project);
 
     projectList.deleteProject(project.id);
     if (ProjectList.activeProject.id === project.id) {
-        ProjectList.activeProject = projectList.projects[0];
         UI.deleteTasks();
-        UI.renderTasks(ProjectList.activeProject);
+        if (projectList.projects.length > 0) {
+            ProjectList.activeProject = projectList.projects[0];
+            UI.renderTasks(ProjectList.activeProject);
+        }
     }
     UI.deleteProjects();
     UI.renderProjects(projectList.projects);
