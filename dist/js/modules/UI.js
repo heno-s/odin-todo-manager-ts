@@ -85,4 +85,67 @@ export default class UI {
             return true;
         }
     }
+    static createAddTaskForm() {
+        const form = document.createElement("form");
+        form.classList.add("add-task-form");
+        form.innerHTML = `
+        <input
+            type="text"
+            placeholder="title"
+            name="title"
+            class="title"
+        />
+        <textarea
+            placeholder="description"
+            name="description"
+            class="description"
+            rows="2"
+        ></textarea>
+        <div>
+            <select class="priority" name="priority">
+                <option value="0">low</option>
+                <option value="1">medium</option>
+                <option value="2">high</option>
+            </select>
+            <input
+                type="date"
+                name="due-date"
+                class="due-date"
+            />
+        </div>
+        <button class="save-button">save</button>
+`;
+        return form;
+    }
+    static createAddTAskDialogForm() {
+        const dialog = document.createElement("dialog");
+        dialog.innerHTML = `<form method="dialog" class="add-task-form">
+        <div class="close-dialog"></div>
+        <input
+            type="text"
+            placeholder="title"
+            name="title"
+            class="title"
+        />
+        <textarea
+            placeholder="description"
+            name="description"
+            class="description"
+        ></textarea>
+        <div>
+            <select class="priority" name="priority">
+                <option value="0">low</option>
+                <option value="1">medium</option>
+                <option value="2">high</option>
+            </select>
+            <input
+                type="date"
+                name="due-date"
+                class="due-date"
+            />
+        </div>
+        <button class="save-button">save</button>
+    </form>`;
+        return dialog;
+    }
 }

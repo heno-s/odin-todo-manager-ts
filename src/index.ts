@@ -8,6 +8,11 @@ const projects = document.querySelector(
 
 const tasks = document.querySelector(".tasks") as HTMLDivElement;
 
+const main = document.querySelector("main") as HTMLElement;
+const container = document.querySelector(
+    ".container"
+) as HTMLDivElement;
+
 const projectHouse = new Project("house");
 const projectWork = new Project("work");
 const projectSchool = new Project("school");
@@ -33,5 +38,9 @@ projects.appendChild(UI.createProject(projectSchool));
 
 tasks.appendChild(UI.createTask(task1));
 tasks.appendChild(UI.createTask(task2));
+main.appendChild(UI.createAddTaskForm());
 
+const dialog = UI.createAddTAskDialogForm();
+container.appendChild(dialog);
+dialog.showModal();
 UI.setActiveProject(projectWork.id);
