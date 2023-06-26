@@ -4,7 +4,12 @@ import UI from "./modules/UI.js";
 const projects = document.querySelector(
     ".projects"
 ) as HTMLUListElement;
-const project = UI.createProject(new Project("home"));
+const projectHouse = UI.createProject(new Project("house"));
+const projectWork = UI.createProject(new Project("work"));
+const projectSchool = UI.createProject(new Project("school"));
 
-projects.appendChild(project);
-console.log(projects);
+projects.appendChild(projectHouse);
+projects.appendChild(projectWork);
+projects.appendChild(projectSchool);
+
+UI.setActiveProject(projectWork.id);

@@ -305,3 +305,12 @@ dialog .description {
     font-size: 1.1rem;
     flex: 1;
 }
+
+.fa-trash-can {
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+.fa-trash-can:hover {
+    color: rgb(240, 121, 105);
+}

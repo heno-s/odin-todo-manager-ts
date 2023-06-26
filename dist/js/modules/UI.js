@@ -1,12 +1,14 @@
 export default class UI {
     static createProject(project) {
         const projectContainer = document.createElement("li");
+        projectContainer.id = project.id;
         projectContainer.classList.add("project");
         projectContainer.innerHTML = `
         <div class="project-marker"></div>
         <span class="project-name">${project.name}</span>
         <div class="project-delete">
-            <span class="trash-icon">O</span>
+            <span class="trash-icon"><i class="far fa-trash-can"></i
+            ></span>
         </div>
         `;
         return projectContainer;
@@ -15,8 +17,8 @@ export default class UI {
         removeActive();
         setActive();
         function setActive() {
-            var _a;
-            (_a = document.getElementById(id)) === null || _a === void 0 ? void 0 : _a.classList.add("active");
+            const project = document.getElementById(id);
+            project === null || project === void 0 ? void 0 : project.classList.add("active");
         }
         function removeActive() {
             const activeProject = document.querySelector(".project.active");

@@ -7,6 +7,10 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0"
         />
+        <script
+            src="https://kit.fontawesome.com/5679bc8dff.js"
+            crossorigin="anonymous"
+        ></script>
         <link rel="stylesheet" href="style.css" />
         <title>Todo manager</title>
     </head>
@@ -17,22 +21,7 @@
                     <h1 class="projects-title">Projects</h1>
                 </div>
                 <div class="sidebar-body">
-                    <ul class="projects">
-                        <li class="project">
-                            <div class="project-marker"></div>
-                            <span class="project-name">home</span>
-                            <div class="project-delete">
-                                <span class="trash-icon">O</span>
-                            </div>
-                        </li>
-                        <li class="project">
-                            <div class="project-marker"></div>
-                            <span class="project-name">work</span>
-                            <div class="project-delete">
-                                <span class="trash-icon">O</span>
-                            </div>
-                        </li>
-                    </ul>
+                    <ul class="projects"></ul>
                     <button class="add-project"></button>
                 </div>
             </div>
@@ -63,7 +52,9 @@
                             </div>
                         </div>
                         <div class="task-delete">
-                            <span class="task-trash-icon">O</span>
+                            <span class="task-trash-icon"
+                                ><i class="far fa-trash-can"></i
+                            ></span>
                         </div>
                     </div>
                     <div class="task">
