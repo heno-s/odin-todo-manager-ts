@@ -127,8 +127,10 @@ export default class UI {
             return true;
         }
     }
-    static createAddTAskDialogForm() {
+    static createUpdateTaskDialogForm({ title, description, priority, dueDate, }) {
+        console.log(title);
         const dialog = document.createElement("dialog");
+        const priorities = ["low", "medium", "high"];
         dialog.innerHTML = `<form method="dialog" class="add-task-form">
         <div class="close-dialog"></div>
         <input
@@ -136,17 +138,18 @@ export default class UI {
             placeholder="title"
             name="title"
             class="title"
+            value="${title}"
         />
         <textarea
             placeholder="description"
             name="description"
             class="description"
-        ></textarea>
+        >${description ? description : ""}</textarea>
         <div>
             <select class="priority" name="priority">
-                <option value="0">low</option>
-                <option value="1">medium</option>
-                <option value="2">high</option>
+                ${priorities
+            .map((value, index) => `<option value="${index}" ${index === priority ? "selected" : ""}>${value}</option>`)
+            .join("")}
             </select>
             <input
                 type="date"
@@ -156,9 +159,11 @@ export default class UI {
         </div>
         <button class="save-button">save</button>
     </form>`;
+        const datePicker = dialog.querySelector("input[type=date]");
+        datePicker.valueAsDate = dueDate;
         return dialog;
     }
-    static deleteAddTaskDialog() {
+    static deleteUpdateTaskDialog() {
         const dialog = document.querySelector("dialog:has(.add-task-form)");
         if (dialog === null) {
             return false;

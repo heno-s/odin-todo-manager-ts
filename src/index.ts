@@ -40,12 +40,8 @@ tasks.appendChild(UI.createTask(task1));
 tasks.appendChild(UI.createTask(task2));
 main.appendChild(UI.createAddTaskForm());
 
-const dialog = UI.createAddTAskDialogForm();
+const dialog = UI.createUpdateTaskDialogForm(task1);
 container.appendChild(dialog);
 dialog.showModal();
 
-setTimeout(() => {
-    UI.deleteAddTaskDialog();
-    UI.deleteAddTaskForm();
-}, 2000);
 UI.setActiveProject(projectWork.id);
