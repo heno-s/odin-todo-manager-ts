@@ -9,6 +9,10 @@ const addProjectButton = document.querySelector(
     ".add-project"
 ) as HTMLButtonElement;
 
+const addTaskButton = document.querySelector(
+    ".add-task"
+) as HTMLDivElement;
+
 addProjectButton.addEventListener("click", (evt) => {
     addProjectButton.classList.add("hide");
 
@@ -42,4 +46,43 @@ addProjectButton.addEventListener("click", (evt) => {
     }
 
     sidebarBody.appendChild(form);
+});
+
+addTaskButton.addEventListener("click", (evt) => {
+    addTaskButton.classList.add("hide");
+
+    const tasks = document.querySelector(".tasks") as HTMLDivElement;
+
+    const form = UI.createAddTaskForm();
+
+    form.addEventListener("submit", handleSubmit);
+
+    function handleSubmit(evt: SubmitEvent) {
+        evt.preventDefault();
+
+        //logic
+        const t = evt.target as HTMLFormElement;
+        const titleInput = t.querySelector(
+            'input[name="title"]'
+        ) as HTMLInputElement;
+        const title = titleInput.value;
+        const description = t["description"].value;
+        const priority = t["priority"].value;
+        const dueDate = t["due-date"].value;
+
+        const task = new Task(title, dueDate, priority, description);
+        const activeProject = ProjectList.activeProject;
+
+        activeProject.addTask(task);
+
+        //render
+        UI.deleteTasks();
+        UI.renderTasks(activeProject);
+
+        addTaskButton.classList.remove("hide");
+        UI.deleteAddTaskForm();
+        form.removeEventListener("submit", handleSubmit);
+    }
+
+    tasks.appendChild(form);
 });

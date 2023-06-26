@@ -62,9 +62,7 @@ export default class UI {
         class="fa-regular fa-calendar"
     ></i></div>
         <span class="task-date"
-            >${Intl.DateTimeFormat("en-US", {
-            dateStyle: "short",
-        }).format(dueDate)}</span
+            >${dueDate}</span
         >
     </div>
         
@@ -95,6 +93,7 @@ export default class UI {
             placeholder="title"
             name="title"
             class="title"
+            required
         />
         <textarea
             placeholder="description"
@@ -103,7 +102,8 @@ export default class UI {
             rows="2"
         ></textarea>
         <div>
-            <select class="priority" name="priority">
+            <select class="priority" name="priority"
+            required>
                 <option value="0">low</option>
                 <option value="1">medium</option>
                 <option value="2">high</option>
@@ -112,6 +112,7 @@ export default class UI {
                 type="date"
                 name="due-date"
                 class="due-date"
+                required
             />
         </div>
         <button class="save-button">save</button>
@@ -189,8 +190,15 @@ export default class UI {
         projects.innerHTML = "";
     }
     static renderTasks(project) {
-        const taskDOM = document.querySelector(".tasks");
-        project.tasks.forEach((task) => taskDOM.appendChild(UI.createTask(task)));
+        const tasksDOM = document.querySelector(".tasks");
+        project.tasks.forEach((task) => {
+            const taskDOM = UI.createTask(task);
+            if (task.isChecked) {
+                const checkbox = taskDOM.querySelector('input[type="checkbox"]');
+                checkbox.setAttribute("checked", "");
+            }
+            tasksDOM.appendChild(UI.createTask(task));
+        });
     }
     static deleteTasks() {
         const tasks = document.querySelector(".tasks");
