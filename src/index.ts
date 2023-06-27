@@ -5,10 +5,12 @@ import Task from "./modules/Task.js";
 import UI from "./modules/UI.js";
 
 const projectList = Storage.getProjectList();
-ProjectList.activeProject = projectList.projects[0];
 
-UI.renderProjects(projectList.projects);
-UI.renderTasks(ProjectList.activeProject);
+if (projectList.projects.length > 0) {
+    ProjectList.activeProject = projectList.projects[0];
+    UI.renderProjects(projectList.projects);
+    UI.renderTasks(ProjectList.activeProject);
+}
 
 const projectsUl = document.querySelector(
     ".projects"
