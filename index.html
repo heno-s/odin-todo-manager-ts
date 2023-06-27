@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <script
+            src="https://kit.fontawesome.com/5679bc8dff.js"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="stylesheet" href="style.css" />
+        <title>Todo manager</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h1 class="projects-title">Projects</h1>
+                </div>
+                <div class="sidebar-body">
+                    <ul class="projects"></ul>
+                    <button class="add-project"></button>
+                </div>
+            </div>
+            <main>
+                <div class="tasks"></div>
+
+                <div class="add-task">
+                    <div class="add-task-mark"></div>
+                    Add task
+                </div>
+
+                <dialog></dialog>
+            </main>
+        </div>
+        <script src="js/index.js" type="module"></script>
+    </body>
+</html>

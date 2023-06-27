@@ -1,0 +1,5 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #36a0db, #4e87a7);
+    --secondary-gradient: linear-gradient(135deg, #36a0db, #407eb7);
+    --primary-button: #6fb4e7;
+}
